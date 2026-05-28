@@ -577,34 +577,107 @@
 
   /* ─── COMPARISON ─── */
   #comparison { background: var(--dark); }
-  .comp-grid {
-    display: grid; grid-template-columns: 1fr 1fr; gap: 24px;
-    margin-top: 56px;
+
+  /* section heading centred, full width */
+  .comp-section { padding: 0 0 48px; }
+  .comp-section .container { text-align: center; }
+  .comp-section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(26px, 4vw, 46px);
+    line-height: 1.15;
+    margin: 0 auto 48px;
+    text-align: center;
+    padding-top: 48px;
+    border-top: 1px solid rgba(201,168,76,0.3);
+    width: 100%;
   }
+
+  /* grid: two equal columns, perfectly centred */
+  .comp-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    margin: 0 auto;
+    max-width: 960px;
+  }
+
   .comp-card {
     border-radius: 24px;
     padding: 36px 32px;
+    display: flex;
+    flex-direction: column;
   }
-  .comp-bad {
-    background: rgba(239,68,68,0.05);
-    border: 1px solid rgba(239,68,68,0.2);
-  }
-  .comp-good {
-    background: rgba(34,197,94,0.05);
-    border: 1px solid rgba(34,197,94,0.2);
-  }
+  .comp-bad  { background: rgba(239,68,68,0.05);  border: 1px solid rgba(239,68,68,0.2); }
+  .comp-good { background: rgba(34,197,94,0.05);  border: 1px solid rgba(34,197,94,0.2); }
+
+  /* card title — centred */
   .comp-header {
-    display: flex; align-items: center; gap: 12px; margin-bottom: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 24px;
   }
-  .comp-badge {
-    font-size: 12px; font-weight: 600; letter-spacing: 1px; text-transform: uppercase;
-    padding: 5px 12px; border-radius: 50px;
+  .comp-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 18px;
+    font-weight: 700;
+    text-align: center;
   }
-  .comp-badge-bad { background: rgba(239,68,68,0.15); color: #FF6B6B; }
-  .comp-badge-good { background: rgba(34,197,94,0.15); color: #4ADE80; }
-  .comp-title { font-size: 20px; font-weight: 700; }
-  .comp-list { list-style: none; display: flex; flex-direction: column; gap: 12px; }
-  .comp-list li { display: flex; align-items: flex-start; gap: 10px; font-size: 14px; color: var(--white-80); }
+  .comp-bad  .comp-title { color: #FF6B6B; }
+  .comp-good .comp-title { color: #4ADE80; }
+
+  /* list items */
+  .comp-list { list-style: none; display: flex; flex-direction: column; gap: 11px; }
+  .comp-list li {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 14px;
+    color: var(--white-80);
+    text-align: left;
+  }
+
+  /* symbols (✕ / ✓) */
+  .comp-sym {
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 22px; height: 22px; min-width: 22px; border-radius: 50%;
+    font-size: 13px; font-weight: 900;
+  }
+  .comp-sym-bad  { background: rgba(239,68,68,0.85);  color: #0A0A0F; border: 1px solid rgba(239,68,68,0.6); }
+  .comp-sym-good { background: rgba(34,197,94,0.85);  color: #0A0A0F; border: 1px solid rgba(34,197,94,0.6); }
+
+  /* numbered circles */
+  .comp-num {
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 22px; height: 22px; min-width: 22px; border-radius: 50%;
+    font-size: 11px; font-weight: 800;
+    font-family: 'Playfair Display', serif;
+  }
+  .comp-num-bad  { background: rgba(239,68,68,0.85);  color: #0A0A0F; border: 1px solid rgba(239,68,68,0.6); }
+  .comp-num-good { background: rgba(34,197,94,0.85);  color: #0A0A0F; border: 1px solid rgba(34,197,94,0.6); }
+
+  /* ─── COMPARISON RESPONSIVE ─── */
+  @media (max-width: 860px) {
+    .comp-grid { gap: 14px; }
+    .comp-card { padding: 24px 16px; }
+    .comp-list li { font-size: 12px; gap: 8px; }
+    .comp-title { font-size: 15px; }
+  }
+  @media (max-width: 480px) {
+    .comp-grid { gap: 8px; }
+    .comp-card { padding: 16px 10px; }
+    .comp-num, .comp-sym { width: 18px; height: 18px; min-width: 18px; font-size: 10px; }
+    .comp-list li { font-size: 11px; gap: 6px; }
+    .comp-title { font-size: 12px; }
+    .comp-header { margin-bottom: 14px; }
+    .comp-section-title { font-size: clamp(18px, 5vw, 28px); margin-bottom: 28px; padding-top: 28px; }
+    .comp-section { padding: 0 0 28px; }
+  }
+
+  /* ─── TWO OPTIONS BOX ─── */
+  @media (max-width: 600px) {
+    .two-options-box { padding: 32px 24px !important; }
+  }
 
   /* ─── URGENCY ─── */
   #urgency { background: var(--dark-3); }
@@ -950,7 +1023,8 @@
 
   /* ─── RESPONSIVE ─── */
   @media (max-width: 900px) {
-    .hero-grid, .what-grid, .nf-grid, .comp-grid { grid-template-columns: 1fr; }
+    .hero-grid, .what-grid, .nf-grid { grid-template-columns: 1fr; }
+    .comp-grid { grid-template-columns: 1fr; }
     .hero-visual { display: none; }
     .steps-row { flex-direction: column; align-items: center; gap: 30px; }
     .step-item::after { display: none; }
@@ -1560,6 +1634,313 @@
   </div>
 </section>
 
+<!-- NEW COMPARISONS BLOCK -->
+<div class="comparisons-wrapper">
+
+<!-- COMP 1: Job vs Digital Products -->
+<section class="comp-section">
+  <div class="container text-center">
+    <h2 class="comp-section-title fade-in">9-to-5 Job <span class="text-gold">vs</span> Digital Products</h2>
+    <div class="comp-grid">
+      <div class="comp-card comp-bad fade-in">
+        <div class="comp-header">
+          <span class="comp-title">9-to-5 Job</span>
+        </div>
+        <ul class="comp-list">
+          <li><span class="comp-num comp-num-bad">1</span>You can get fired anytime — no warning, no mercy</li>
+          <li><span class="comp-num comp-num-bad">2</span>Your salary barely grows year after year</li>
+          <li><span class="comp-num comp-num-bad">3</span>You make your boss rich, not yourself</li>
+          <li><span class="comp-num comp-num-bad">4</span>You need permission for your own time off</li>
+          <li><span class="comp-num comp-num-bad">5</span>Feels safe but one income source is a trap</li>
+          <li><span class="comp-num comp-num-bad">6</span>Talent is ignored — politics decide promotions</li>
+          <li><span class="comp-num comp-num-bad">7</span>You stop growing after a while</li>
+          <li><span class="comp-num comp-num-bad">8</span>5 out of 7 days spent waiting for the weekend</li>
+          <li><span class="comp-num comp-num-bad">9</span>Retirement is a gamble, not a plan</li>
+          <li><span class="comp-num comp-num-bad">10</span>That Sunday dread is real — and ignored</li>
+        </ul>
+      </div>
+      <div class="comp-card comp-good fade-in fade-delay-2">
+        <div class="comp-header">
+          <span class="comp-title">Digital Products</span>
+        </div>
+        <ul class="comp-list">
+          <li><span class="comp-num comp-num-good">1</span>Make it once and it keeps paying you</li>
+          <li><span class="comp-num comp-num-good">2</span>Earn while you sleep — real passive income</li>
+          <li><span class="comp-num comp-num-good">3</span>Start with just a laptop and knowledge</li>
+          <li><span class="comp-num comp-num-good">4</span>Nobody can fire you — it's your business</li>
+          <li><span class="comp-num comp-num-good">5</span>Control your time completely</li>
+          <li><span class="comp-num comp-num-good">6</span>Help more people, earn exponentially more</li>
+          <li><span class="comp-num comp-num-good">7</span>You own a real, valuable, sellable asset</li>
+          <li><span class="comp-num comp-num-good">8</span>Learn life-skills that never expire</li>
+          <li><span class="comp-num comp-num-good">9</span>Start on the side while still employed</li>
+          <li><span class="comp-num comp-num-good">10</span>Your income has absolutely no ceiling</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- COMP 2: Traditional Business vs Digital Products -->
+<section class="comp-section">
+  <div class="container text-center">
+    <h2 class="comp-section-title fade-in">Traditional Business <span class="text-gold">vs</span> Digital Products</h2>
+    <div class="comp-grid">
+      <div class="comp-card comp-bad fade-in">
+        <div class="comp-header">
+          <span class="comp-title">Traditional Business</span>
+        </div>
+        <ul class="comp-list">
+          <li><span class="comp-num comp-num-bad">1</span>Thousands in costs before your first sale</li>
+          <li><span class="comp-num comp-num-bad">2</span>If you don't show up, nothing works</li>
+          <li><span class="comp-num comp-num-bad">3</span>Location limits your entire customer base</li>
+          <li><span class="comp-num comp-num-bad">4</span>Bills keep coming even on slow months</li>
+          <li><span class="comp-num comp-num-bad">5</span>One disaster can wipe out years of work</li>
+          <li><span class="comp-num comp-num-bad">6</span>12–16 hour days with delayed rewards</li>
+          <li><span class="comp-num comp-num-bad">7</span>Managing staff is a full-time job itself</li>
+          <li><span class="comp-num comp-num-bad">8</span>Every growth step costs big money first</li>
+          <li><span class="comp-num comp-num-bad">9</span>Tied to one city, one street, one building</li>
+          <li><span class="comp-num comp-num-bad">10</span>Most traditional businesses fail in 3 years</li>
+        </ul>
+      </div>
+      <div class="comp-card comp-good fade-in fade-delay-2">
+        <div class="comp-header">
+          <span class="comp-title">Digital Products</span>
+        </div>
+        <ul class="comp-list">
+          <li><span class="comp-num comp-num-good">1</span>Start with almost no money</li>
+          <li><span class="comp-num comp-num-good">2</span>Runs automatically without your presence</li>
+          <li><span class="comp-num comp-num-good">3</span>Sell to the entire world from day one</li>
+          <li><span class="comp-num comp-num-good">4</span>Costs stay low no matter how much you grow</li>
+          <li><span class="comp-num comp-num-good">5</span>Work from anywhere — beach, home, café</li>
+          <li><span class="comp-num comp-num-good">6</span>One product makes money for years</li>
+          <li><span class="comp-num comp-num-good">7</span>Test ideas quickly and cheaply</li>
+          <li><span class="comp-num comp-num-good">8</span>Growing costs no extra money</li>
+          <li><span class="comp-num comp-num-good">9</span>Build an audience that belongs to you</li>
+          <li><span class="comp-num comp-num-good">10</span>Income can grow without limits</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- COMP 3: Freelancing vs Digital Products -->
+<section class="comp-section">
+  <div class="container text-center">
+    <h2 class="comp-section-title fade-in">Freelancing <span class="text-gold">vs</span> Digital Products</h2>
+    <div class="comp-grid">
+      <div class="comp-card comp-bad fade-in">
+        <div class="comp-header">
+          <span class="comp-title">Freelancing</span>
+        </div>
+        <ul class="comp-list">
+          <li><span class="comp-num comp-num-bad">1</span>No work this month means no money this month</li>
+          <li><span class="comp-num comp-num-bad">2</span>Always hunting for the next client</li>
+          <li><span class="comp-num comp-num-bad">3</span>Clients own your time completely</li>
+          <li><span class="comp-num comp-num-bad">4</span>Income hits a hard ceiling — you only have 24 hours</li>
+          <li><span class="comp-num comp-num-bad">5</span>One bad client can ruin your entire month</li>
+          <li><span class="comp-num comp-num-bad">6</span>Same work repeated forever — no leverage</li>
+          <li><span class="comp-num comp-num-bad">7</span>Feast and famine cycle is real and stressful</li>
+          <li><span class="comp-num comp-num-bad">8</span>Raising your rates is always uncomfortable</li>
+          <li><span class="comp-num comp-num-bad">9</span>No way to multiply your effort whatsoever</li>
+          <li><span class="comp-num comp-num-bad">10</span>Burnout hits fast and destroys your creativity</li>
+        </ul>
+      </div>
+      <div class="comp-card comp-good fade-in fade-delay-2">
+        <div class="comp-header">
+          <span class="comp-title">Digital Products</span>
+        </div>
+        <ul class="comp-list">
+          <li><span class="comp-num comp-num-good">1</span>Create once, sell it forever automatically</li>
+          <li><span class="comp-num comp-num-good">2</span>Income doesn't stop when you stop</li>
+          <li><span class="comp-num comp-num-good">3</span>No clients, no revisions, no invoice chasing</li>
+          <li><span class="comp-num comp-num-good">4</span>Sell to thousands simultaneously — unlimited earnings</li>
+          <li><span class="comp-num comp-num-good">5</span>Your best work compounds and gains value over time</li>
+          <li><span class="comp-num comp-num-good">6</span>You set the price — nobody negotiates it</li>
+          <li><span class="comp-num comp-num-good">7</span>One product funds the creation of the next</li>
+          <li><span class="comp-num comp-num-good">8</span>Build an audience that trusts and returns</li>
+          <li><span class="comp-num comp-num-good">9</span>Work on what you genuinely enjoy</li>
+          <li><span class="comp-num comp-num-good">10</span>Business gets easier the longer you run it</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- COMP 4: Dropshipping vs Digital Products -->
+<section class="comp-section">
+  <div class="container text-center">
+    <h2 class="comp-section-title fade-in">Dropshipping <span class="text-gold">vs</span> Digital Products</h2>
+    <div class="comp-grid">
+      <div class="comp-card comp-bad fade-in">
+        <div class="comp-header">
+          <span class="comp-title">Dropshipping</span>
+        </div>
+        <ul class="comp-list">
+          <li><span class="comp-num comp-num-bad">1</span>You control nothing — quality, shipping, packaging</li>
+          <li><span class="comp-num comp-num-bad">2</span>Painfully thin margins after ads and fees</li>
+          <li><span class="comp-num comp-num-bad">3</span>Anyone can copy your store in 5 minutes</li>
+          <li><span class="comp-num comp-num-bad">4</span>3–6 week shipping kills your reputation</li>
+          <li><span class="comp-num comp-num-bad">5</span>Ads are expensive and getting worse every year</li>
+          <li><span class="comp-num comp-num-bad">6</span>Refunds and chargebacks freeze your accounts</li>
+          <li><span class="comp-num comp-num-bad">7</span>Always chasing the next winning product</li>
+          <li><span class="comp-num comp-num-bad">8</span>Customer service is a daily nightmare</li>
+          <li><span class="comp-num comp-num-bad">9</span>Zero brand loyalty from buyers</li>
+          <li><span class="comp-num comp-num-bad">10</span>Not passive — it's a full-time job</li>
+        </ul>
+      </div>
+      <div class="comp-card comp-good fade-in fade-delay-2">
+        <div class="comp-header">
+          <span class="comp-title">Digital Products</span>
+        </div>
+        <ul class="comp-list">
+          <li><span class="comp-num comp-num-good">1</span>You control everything completely</li>
+          <li><span class="comp-num comp-num-good">2</span>Huge margins — almost all profit is yours</li>
+          <li><span class="comp-num comp-num-good">3</span>Nobody can replicate your knowledge and voice</li>
+          <li><span class="comp-num comp-num-good">4</span>Instant automatic delivery — always</li>
+          <li><span class="comp-num comp-num-good">5</span>Build an audience and reach them for free</li>
+          <li><span class="comp-num comp-num-good">6</span>No refund nightmares or account freezes</li>
+          <li><span class="comp-num comp-num-good">7</span>Your product never goes out of stock</li>
+          <li><span class="comp-num comp-num-good">8</span>Customers remember you, not just the product</li>
+          <li><span class="comp-num comp-num-good">9</span>One product funds the next one</li>
+          <li><span class="comp-num comp-num-good">10</span>It actually gets easier over time</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- COMP 5: Amazon vs Digital Products -->
+<section class="comp-section">
+  <div class="container text-center">
+    <h2 class="comp-section-title fade-in">Amazon <span class="text-gold">vs</span> Digital Products</h2>
+    <div class="comp-grid">
+      <div class="comp-card comp-bad fade-in">
+        <div class="comp-header">
+          <span class="comp-title">Amazon</span>
+        </div>
+        <ul class="comp-list">
+          <li><span class="comp-num comp-num-bad">1</span>Amazon is your landlord and your competitor</li>
+          <li><span class="comp-num comp-num-bad">2</span>Fees eat everything — the math is brutal</li>
+          <li><span class="comp-num comp-num-bad">3</span>Account banned without warning at any time</li>
+          <li><span class="comp-num comp-num-bad">4</span>You never own your customers' contact info</li>
+          <li><span class="comp-num comp-num-bad">5</span>Competition from thousands of low-cost sellers</li>
+          <li><span class="comp-num comp-num-bad">6</span>$5,000–$10,000 needed before your first sale</li>
+          <li><span class="comp-num comp-num-bad">7</span>Inventory balance is a constant stressful game</li>
+          <li><span class="comp-num comp-num-bad">8</span>Fake reviews can destroy your rating overnight</li>
+          <li><span class="comp-num comp-num-bad">9</span>Supply chain problems outside your control</li>
+          <li><span class="comp-num comp-num-bad">10</span>One algorithm change halves your business</li>
+        </ul>
+      </div>
+      <div class="comp-card comp-good fade-in fade-delay-2">
+        <div class="comp-header">
+          <span class="comp-title">Digital Products</span>
+        </div>
+        <ul class="comp-list">
+          <li><span class="comp-num comp-num-good">1</span>No platform can take your business away</li>
+          <li><span class="comp-num comp-num-good">2</span>Zero fees — keep almost all your profit</li>
+          <li><span class="comp-num comp-num-good">3</span>Your customers belong to you on your list</li>
+          <li><span class="comp-num comp-num-good">4</span>No inventory, storage, or shipping ever</li>
+          <li><span class="comp-num comp-num-good">5</span>Build a brand people actually remember</li>
+          <li><span class="comp-num comp-num-good">6</span>Start for almost nothing — knowledge is enough</li>
+          <li><span class="comp-num comp-num-good">7</span>Instant delivery — customers happy automatically</li>
+          <li><span class="comp-num comp-num-good">8</span>One product works forever without restocking</li>
+          <li><span class="comp-num comp-num-good">9</span>Immune to all supply chain problems</li>
+          <li><span class="comp-num comp-num-good">10</span>Business grows with audience, not ad spend</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- COMP 6: Trading vs Digital Products -->
+<section class="comp-section">
+  <div class="container text-center">
+    <h2 class="comp-section-title fade-in">Trading <span class="text-gold">vs</span> Digital Products</h2>
+    <div class="comp-grid">
+      <div class="comp-card comp-bad fade-in">
+        <div class="comp-header">
+          <span class="comp-title">Trading</span>
+        </div>
+        <ul class="comp-list">
+          <li><span class="comp-num comp-num-bad">1</span>Over 80% of retail traders lose their capital</li>
+          <li><span class="comp-num comp-num-bad">2</span>You can wake up broke overnight</li>
+          <li><span class="comp-num comp-num-bad">3</span>Your emotions are your worst enemy</li>
+          <li><span class="comp-num comp-num-bad">4</span>Takes 3–5 years of losses before getting good</li>
+          <li><span class="comp-num comp-num-bad">5</span>Need large capital just to make real money</li>
+          <li><span class="comp-num comp-num-bad">6</span>Not passive — screens watched for hours daily</li>
+          <li><span class="comp-num comp-num-bad">7</span>One wrong trade wipes out months of gains</li>
+          <li><span class="comp-num comp-num-bad">8</span>The market doesn't care about your analysis</li>
+          <li><span class="comp-num comp-num-bad">9</span>Leverage multiplies losses faster than gains</li>
+          <li><span class="comp-num comp-num-bad">10</span>Stress and anxiety never fully go away</li>
+        </ul>
+      </div>
+      <div class="comp-card comp-good fade-in fade-delay-2">
+        <div class="comp-header">
+          <span class="comp-title">Digital Products</span>
+        </div>
+        <ul class="comp-list">
+          <li><span class="comp-num comp-num-good">1</span>You cannot lose what you already made</li>
+          <li><span class="comp-num comp-num-good">2</span>Income depends on value, not luck</li>
+          <li><span class="comp-num comp-num-good">3</span>Build something that grows stronger every month</li>
+          <li><span class="comp-num comp-num-good">4</span>No screen watching required — genuine freedom</li>
+          <li><span class="comp-num comp-num-good">5</span>Start with $0 and make your first sale this week</li>
+          <li><span class="comp-num comp-num-good">6</span>Bad days cost you nothing financially</li>
+          <li><span class="comp-num comp-num-good">7</span>Better skills always mean more money — guaranteed</li>
+          <li><span class="comp-num comp-num-good">8</span>You help people and get paid for it genuinely</li>
+          <li><span class="comp-num comp-num-good">9</span>Multiple products mean multiple income streams</li>
+          <li><span class="comp-num comp-num-good">10</span>Your mental health stays completely intact</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+</div><!-- end comparisons-wrapper -->
+
+<!-- TWO OPTIONS BOX -->
+<section style="background: var(--dark-2); padding: 70px 24px;">
+    <div class="two-options-box fade-in" style="
+      max-width: 1100px;
+      margin: 0 auto;
+      border: 1.5px solid var(--gold);
+      border-radius: 24px;
+      padding: 48px 64px;
+      background: linear-gradient(135deg, rgba(201,168,76,0.06), rgba(201,168,76,0.02));
+      position: relative;
+      overflow: hidden;
+    ">
+      <!-- subtle glow corner -->
+      <div style="
+        position: absolute; top: -60px; right: -60px;
+        width: 220px; height: 220px;
+        background: radial-gradient(circle, rgba(201,168,76,0.12), transparent 70%);
+        border-radius: 50%; pointer-events: none;
+      "></div>
+
+      <h3 style="
+        font-family: 'Playfair Display', serif;
+        font-size: clamp(22px, 3.5vw, 34px);
+        font-weight: 800;
+        color: var(--gold);
+        margin-bottom: 24px;
+        line-height: 1.2;
+      ">You Have Two Options Right Now</h3>
+
+      <p style="
+        font-size: clamp(14px, 2vw, 17px);
+        color: var(--white-80);
+        line-height: 1.9;
+        margin: 0;
+      ">
+        You can close this page and try to figure it all out on your own — for free. Spend the next <strong style="color: var(--white);">2 years</strong> watching random YouTube videos, downloading free PDFs that contradict each other, testing tools that don't work, making mistakes that cost you time you'll never get back. Most people who go that route don't quit because they're lazy. They quit because nobody gave them a clear path and they get trapped in <strong style="color: var(--white);">analysis paralysis.</strong>
+        <br><br>
+        And the other option is this Roadmap — which gives you <strong style="color: var(--white);">everything plug and play.</strong> No guessing. No wasting months figuring out what works. The tools, the system, the steps — all laid out, ready to go. The only thing left is your decision.
+        <br><br>
+        And keep one thing in mind: <strong style="color: var(--gold);">coming to this page is already part of the GOD plan</strong> — because opportunity comes to those who deserve it.
+      </p>
+    </div>
+</section>
+
 <!-- REQUIREMENTS -->
 <section id="requirements" class="section-sm" style="background: var(--dark);">
   <div class="container">
@@ -1905,35 +2286,31 @@
 <!-- COMPARISON -->
 <section id="comparison" class="section" style="background: var(--dark-2);">
   <div class="container text-center">
-    <span class="section-label fade-in">The Decision</span>
-    <h2 class="section-title fade-in">Level 2 vs <span class="text-gold">Level 10</span> Opportunity</h2>
-    <div class="comp-grid">
+    <h2 class="comp-section-title fade-in">Trading Time for Money <span class="text-gold">vs</span> Selling Digital Products</h2>    <div class="comp-grid">
       <div class="comp-card comp-bad fade-in">
         <div class="comp-header">
-          <span class="comp-badge comp-badge-bad">⏳ Level 2</span>
           <span class="comp-title">Trading Time for Money</span>
         </div>
         <ul class="comp-list">
-          <li><span>❌</span>You only earn when you work</li>
-          <li><span>❌</span>Income is permanently capped</li>
-          <li><span>❌</span>Exhausting and unsustainable</li>
-          <li><span>❌</span>No scalability whatsoever</li>
-          <li><span>❌</span>Constantly chasing clients</li>
-          <li><span>❌</span>No passive income, ever</li>
+          <li><span class="comp-sym comp-sym-bad">✕</span>You only earn when you work</li>
+          <li><span class="comp-sym comp-sym-bad">✕</span>Income is permanently capped</li>
+          <li><span class="comp-sym comp-sym-bad">✕</span>Exhausting and unsustainable</li>
+          <li><span class="comp-sym comp-sym-bad">✕</span>No scalability whatsoever</li>
+          <li><span class="comp-sym comp-sym-bad">✕</span>Constantly chasing clients</li>
+          <li><span class="comp-sym comp-sym-bad">✕</span>No passive income, ever</li>
         </ul>
       </div>
       <div class="comp-card comp-good fade-in fade-delay-2">
         <div class="comp-header">
-          <span class="comp-badge comp-badge-good">🚀 Level 10</span>
           <span class="comp-title">Selling Digital Products</span>
         </div>
         <ul class="comp-list">
-          <li><span>✅</span>Create once, sell forever</li>
-          <li><span>✅</span>Unlimited earning potential</li>
-          <li><span>✅</span>No inventory, no shipping</li>
-          <li><span>✅</span>Automated sales & delivery</li>
-          <li><span>✅</span>Global reach, no hassles</li>
-          <li><span>✅</span>Freedom & flexibility always</li>
+          <li><span class="comp-sym comp-sym-good">✓</span>Create once, sell forever</li>
+          <li><span class="comp-sym comp-sym-good">✓</span>Unlimited earning potential</li>
+          <li><span class="comp-sym comp-sym-good">✓</span>No inventory, no shipping</li>
+          <li><span class="comp-sym comp-sym-good">✓</span>Automated sales &amp; delivery</li>
+          <li><span class="comp-sym comp-sym-good">✓</span>Global reach, no hassles</li>
+          <li><span class="comp-sym comp-sym-good">✓</span>Freedom &amp; flexibility always</li>
         </ul>
       </div>
     </div>
